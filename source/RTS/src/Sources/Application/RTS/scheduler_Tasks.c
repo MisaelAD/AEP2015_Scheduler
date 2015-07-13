@@ -3,32 +3,32 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Source:         scheduler.c
+* C Source:         scheduler_Tasks.c
 * Instance:         RPL_1
 * %version:         1.1
 * %created_by:      Misael Alvarez Domínguez
-* %date_created:    Wednesday, July 8, 2015
+* %date_created:    Monday, July 13, 2015
 *=============================================================================*/
 /* DESCRIPTION : C source template file                                       */
 /*============================================================================*/
-/* FUNCTION COMMENT : This file describes the C source template according to  */
-/* the new software platform                                                  */
+/* FUNCTION COMMENT : This file allocates the periodic tasks executed by the  */
+/*                    scheduler				                                  */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | 04/04/2014  |  Dummy functions              |Francisco Martinez*/
-/*  1.1      | 08/07/2015  |  Scheduler file & template    | Misael Alvarez   */
+/*  1.0      | DD/MM/YYYY  |                               | Mr. Template     */
+/*  1.1      | 13/07/2015  |File added to complete 		   | Misael AD        */
+/*        	 |   		   |scheduler structure 		   |  				  */
 /*============================================================================*/
 
 /* Includes */
 /* -------- */
-#include "scheduler.h"
-#include "GPIO.h"
-#include "typedefs.h"
 #include "scheduler_Tasks.h"
+#include "GPIO.h"
+#include "scheduler_Types.h"
 
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
@@ -57,21 +57,7 @@
 
 
 /* LONG and STRUCTURE RAM variables */
-TASKSTRUCT function_table_def[]=		/* Task's tables initialization */
-{
-	{ 0,  10, 0, &scheduler_5ms   },
-	{ 0,  20, 1, &scheduler_10ms  },
-	{ 0, 100, 2, &scheduler_50ms  },
-	{ 0, 200, 3, &scheduler_100ms }	
-};
 
-TASKSTRUCT *rps_TaskPtr[]=				/* Pointers to tasks structures initialization */
-{
-	&function_table_def[0],
-	&function_table_def[1],
-	&function_table_def[2],
-	&function_table_def[3]
-};
 
 /*======================================================*/ 
 /* close variable declaration sections                  */
@@ -82,7 +68,6 @@ TASKSTRUCT *rps_TaskPtr[]=				/* Pointers to tasks structures initialization */
 
 /* Private functions prototypes */
 /* ---------------------------- */
-
 
 
 /* Exported functions prototypes */
@@ -102,61 +87,53 @@ TASKSTRUCT *rps_TaskPtr[]=				/* Pointers to tasks structures initialization */
 /* Private functions */
 /* ----------------- */
 /**************************************************************
- *  Name                 : Test
+ *  Name                 : scheduler_5ms
  *  Description          :
  *  Parameters           :  [Input, Output, Input / output]
  *  Return               :
  *  Critical/explanation :    [yes / No]
  **************************************************************/
-void Test(void)
+void scheduler_5ms(void)	/* Each 5ms */
 {
-    static T_UWORD rub_U16Counter = 0;
-    
-    rub_U16Counter++;
-    
-    if (rub_U16Counter == 1000)
-    {
-    	LED_TOGGLE(LED1);
-    	rub_U16Counter = 0;	
-    }
-
+	LED_TOGGLE(LED1);
 }
 
 /**************************************************************
- *  Name                 : scheduler_tick
- *  Description          :	Scheduler OS tick
+ *  Name                 : scheduler_10ms
+ *  Description          :
  *  Parameters           :  [Input, Output, Input / output]
  *  Return               :
  *  Critical/explanation :    [yes / No]
  **************************************************************/
-void scheduler_tick(void)
+void scheduler_10ms(void)	/* Each 10ms */
 {
-	T_UBYTE i;
-	for(i=0;i<4;i++)		
-	{
-		rps_TaskPtr[i]->ruw_Counter++;			/* Increase counters */
-		if( (rps_TaskPtr[i]->ruw_Counter) == ((rps_TaskPtr[i]->ruw_TopCount)+(rps_TaskPtr[i]->ruw_Offset)) )
-		{
-			rps_TaskPtr[i]->ruw_Counter=0;		/* Clear counter */
-			rps_TaskPtr[i]->cpfu_PerFunct();	/* Call periodic function */
-		}
-	}
+	LED_TOGGLE(LED2);
 }
 
 /**************************************************************
- *  Name                 : scheduler_endless_loop
- *  Description          :	
+ *  Name                 : scheduler_50ms
+ *  Description          :
  *  Parameters           :  [Input, Output, Input / output]
  *  Return               :
  *  Critical/explanation :    [yes / No]
  **************************************************************/
-void scheduler_endless_loop(void)
+void scheduler_50ms(void)	/* Each 50ms */
 {
-	for(;;)
-	{
-		/* Do nothing */	
-	}
+	LED_TOGGLE(LED3);
 }
+
+/**************************************************************
+ *  Name                 : scheduler_100ms
+ *  Description          :
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+void scheduler_100ms(void)	/* Each 100ms */
+{
+	LED_TOGGLE(LED4);
+}
+
 
 /* Exported functions */
 /* ------------------ */
@@ -167,3 +144,4 @@ void scheduler_endless_loop(void)
  *  Return               :
  *  Critical/explanation :    [yes / No]
  **************************************************************/
+
