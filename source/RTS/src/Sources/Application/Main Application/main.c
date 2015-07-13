@@ -3,7 +3,7 @@
 
 
 /** GPIO funtion prototypes  */
-#include    "GPIO.h"
+#include	"init.h"
 #include    "PIT.h"
 #include    "scheduler.h"
 
@@ -14,14 +14,6 @@
 /****************************************************************************************************
 * Declaration of module wide FUNCTIONs 
 *****************************************************************************************************/
-
-void disableWatchdog(void) 
-{
-  SWT.SR.R = 0x0000c520;     /* Write keys to clear soft lock bit */
-  SWT.SR.R = 0x0000d928; 
-  SWT.CR.R = 0x8000010A;     /* Clear watchdog enable (WEN) */
-}
-
 T_UBYTE Function1(T_UBYTE *rpub_U8Ptr)
 {
 	return (*rpub_U8Ptr);
@@ -59,10 +51,8 @@ int main(void)
 	/* Disable Watchdog */
 	disableWatchdog();
 	/*Initialize LEDs on TRK-MPC560xB board */
-	vfnGPIO_LED_Init();
+	init_OnBoardLEDs();
 	
-
-		
 	/*Initialize Interrupts */
 	INTC_InitINTCInterrupts();
 	/*Initialize Exception Handlers */
