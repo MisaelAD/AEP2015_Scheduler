@@ -3,40 +3,45 @@
 /*============================================================================*/
 /*                        OBJECT SPECIFICATION                                */
 /*============================================================================*
-* C Include:        scheduler_Types.h
+* C Include:        scheduler.h
 * Instance:         RPL_1
-* %version:         1.1
+* %version:         1.2
 * %created_by:      Misael Alvarez Domínguez
-* %date_created:    Monday, July 13, 2015
+* %date_created:    Wednesday, July 8, 2015
 *=============================================================================*/
-/* DESCRIPTION : Header file scheduler_Types                                  */
+/* DESCRIPTION : Header file template                                         */
 /*============================================================================*/
-/* FUNCTION COMMENT : Scheduler Module type definitions					      */
-/*               															  */
+/* FUNCTION COMMENT : contains only symbols which are exported to internal    */
+/* platform modules. This will not be delivered with the library              */
 /*                                                                            */
 /*============================================================================*/
 /*                               OBJECT HISTORY                               */
 /*============================================================================*/
 /*  REVISION |   DATE      |                               |      AUTHOR      */
 /*----------------------------------------------------------------------------*/
-/*  1.0      | DD/MM/YYYY  | SAR/SIF/SCN_xxx               | Mr. Template     */
-/*  1.1      | 13/07/2015  |File added to complete 		   | Misael AD        */
-/*        	 |   		   |scheduler structure 		   |  				  */
+/*  1.0      | 04/04/2014  |  Dummy functions              |Francisco Martinez*/
+/*  1.1      | 08/07/2015  |Scheduler file & template      | Misael Alvarez   */
+/*  1.2      | 16/07/2015  |  Scheduler main functions     | Misael Alvarez   */
 /*============================================================================*/
 
-#ifndef SCHEDULER_TYPES_H                               /* To avoid double inclusion */
-#define SCHEDULER_TYPES_H
+#ifndef SCHEDULER_H        /*prevent duplicated includes*/
+#define SCHEDULER_H
 
 /* Includes */
 /* -------- */
-
+#include "SchM_Types.h"
 
 /* Exported types and constants */
 /* ---------------------------- */
 
 /* Types definition */
 /* typedef */
-
+typedef struct {					/* New handling task structure definition */
+		T_UWORD ruw_Counter;
+		T_UWORD ruw_TopCount;
+		T_UWORD ruw_Offset;
+		tCallbackFunction cpfu_PerFunct; 
+}TASKSTRUCT;
 
 /*==================================================*/ 
 /* Declaration of exported constants                */
@@ -71,7 +76,13 @@
 /* ---------------------------------------- */
 
 /* Functions prototypes */
-
+void Test(void);
+void SchM_Background(void);
+void scheduler_tick(void);
+void SchM_Init(const SchConfigType *SchM_Config);
+void SchM_Stop(void);
+void SchM_Start(void);
+void SchM_OSTick(void);
 
 /* Functions macros */
 
@@ -80,5 +91,4 @@
 
 
 #endif
-
 

@@ -5,7 +5,7 @@
 /*============================================================================*
 * C Source:         scheduler_Tasks.c
 * Instance:         RPL_1
-* %version:         1.1
+* %version:         1.2
 * %created_by:      Misael Alvarez Domínguez
 * %date_created:    Monday, July 13, 2015
 *=============================================================================*/
@@ -22,13 +22,14 @@
 /*  1.0      | DD/MM/YYYY  |                               | Mr. Template     */
 /*  1.1      | 13/07/2015  |File added to complete 		   | Misael AD        */
 /*        	 |   		   |scheduler structure 		   |  				  */
+/*  1.2      | 16/07/2015  |Periodic tasks                 | Misael AD        */
 /*============================================================================*/
 
 /* Includes */
 /* -------- */
-#include "scheduler_Tasks.h"
-#include "GPIO.h"
-#include "scheduler_Types.h"
+#include "SchM_Tasks.h"
+#include "LED.h"
+#include "SchM_Types.h"
 
 /* Functions macros, constants, types and datas         */
 /* ---------------------------------------------------- */
@@ -95,7 +96,7 @@
  **************************************************************/
 void scheduler_5ms(void)	/* Each 5ms */
 {
-	LED_TOGGLE(LED1);
+	
 }
 
 /**************************************************************
@@ -107,7 +108,7 @@ void scheduler_5ms(void)	/* Each 5ms */
  **************************************************************/
 void scheduler_10ms(void)	/* Each 10ms */
 {
-	LED_TOGGLE(LED2);
+	
 }
 
 /**************************************************************
@@ -119,7 +120,7 @@ void scheduler_10ms(void)	/* Each 10ms */
  **************************************************************/
 void scheduler_50ms(void)	/* Each 50ms */
 {
-	LED_TOGGLE(LED3);
+	
 }
 
 /**************************************************************
@@ -131,17 +132,80 @@ void scheduler_50ms(void)	/* Each 50ms */
  **************************************************************/
 void scheduler_100ms(void)	/* Each 100ms */
 {
-	LED_TOGGLE(LED4);
+	LED_T(LED4);
 }
 
 
 /* Exported functions */
 /* ------------------ */
 /**************************************************************
- *  Name                 :	export_func
- *  Description          :
+ *  Name                 :	SchM_Task3p125ms
+ *  Description          :	Task activated every 3.125ms
  *  Parameters           :  [Input, Output, Input / output]
  *  Return               :
  *  Critical/explanation :    [yes / No]
  **************************************************************/
+void SchM_Task3p125ms(void)
+{
+	
+}
 
+/**************************************************************
+ *  Name                 :	SchM_Task6p25ms
+ *  Description          :	Task activated every 6.25ms
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+void SchM_Task6p25ms(void)
+{
+	
+}
+
+/**************************************************************
+ *  Name                 :	SchM_Task12p25ms
+ *  Description          :	Task activated every 12.25ms
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+void SchM_Task12p25ms(void)
+{
+	LED_T(LED1);
+}
+
+/**************************************************************
+ *  Name                 :	SchM_Task25ms
+ *  Description          :	Task activated every 25ms
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+void SchM_Task25ms(void)
+{
+	LED_T(LED2);
+}
+
+/**************************************************************
+ *  Name                 :	SchM_Task50ms
+ *  Description          :	Task activated every 50ms
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+void SchM_Task50ms(void)
+{
+	LED_T(LED3);
+}
+
+/**************************************************************
+ *  Name                 :	SchM_Task100ms
+ *  Description          :	Task activated every 100ms
+ *  Parameters           :  [Input, Output, Input / output]
+ *  Return               :
+ *  Critical/explanation :    [yes / No]
+ **************************************************************/
+void SchM_Task100ms(void)
+{
+	LED_T(LED4);
+}
